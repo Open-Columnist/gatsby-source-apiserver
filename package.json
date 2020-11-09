@@ -3,6 +3,9 @@
   "version": "2.1.7",
   "description": "Gatsby plugin to handle any third party api data intake.",
   "main": "index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "build": "babel src --out-dir . --ignore __tests__",
     "watch": "babel -w src --out-dir . --ignore __tests__",
