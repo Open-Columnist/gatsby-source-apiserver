@@ -36,11 +36,11 @@ async function doFetch(
     reporter.verbose(`loading from server ${curUrl}`);
     const response = await axios(options);
     reporter.verbose(`got url ${curUrl}`);
-    routeData = response.data;
+    const { data } = response;
 
     haveMorePages = false; // needs to be set to true below
     if (routeData) {
-      completeResult.push(routeData);
+      completeResult.push(data);
       if (calculateNextPage) {
         try {
           const nextPage = calculateNextPage(curUrl, response, context);
@@ -57,7 +57,7 @@ async function doFetch(
     }
   } while (haveMorePages);
 
-  return didPage ? completeResult : routeData;
+  return completeResult;
 }
 
 async function fetch({
@@ -85,14 +85,6 @@ async function fetch({
   // Attempt to download the data from api
   routeData = useCache && (await cache.get(url));
 
-  if (payloadKey && calculateNextPage) {
-    reporter.panic(
-      "payloadKey and calculateNextPage currently dont work together yet",
-      new Error(
-        "payloadKey and calculateNextPage currently dont work together yet"
-      )
-    );
-  }
   if (!routeData) {
     try {
       routeData = await doFetch(
@@ -144,9 +136,9 @@ async function fetch({
 
     // Return just the intended data
     if (payloadKey) {
-      return routeData[payloadKey];
+      return routeData.map(data => data[payloadKey]).flat();
     }
-    return routeData;
+    return routeData.flat();
   }
 }
 
