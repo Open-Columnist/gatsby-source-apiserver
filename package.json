@@ -1,6 +1,6 @@
 {
   "name": "@open-columnist/gatsby-source-apiserver",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "Gatsby plugin to handle any third party api data intake.",
   "main": "index.js",
   "publishConfig": {
@@ -9,7 +9,7 @@
   "scripts": {
     "build": "babel src --out-dir . --ignore __tests__",
     "watch": "babel -w src --out-dir . --ignore __tests__",
-    "prepublish": "cross-env NODE_ENV=production npm run build"
+    "build:npm": "cross-env NODE_ENV=production npm run build"
   },
   "homepage": "https://github.com/thinhle-agilityio/gatsby-source-apiserver#readme",
   "keywords": [

@@ -16,4 +16,4 @@ jobs:
         run: |
           npm ci
           npm run prepublish
-          npm publish
+          npm build:npm
