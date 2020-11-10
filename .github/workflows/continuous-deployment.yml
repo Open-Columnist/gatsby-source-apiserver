@@ -8,19 +8,12 @@ jobs:
   build-and-deloy:
     name: Build & Deploy
     runs-on: ubuntu-latest
+    container: node:12.8.1
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-      - name: Build
+      - name: Build & Publish
         run: |
           npm ci
           npm run prepublish
-      - name: npm publish on every push
-        uses: shawnbot/npm-publish-action@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          npm publish
