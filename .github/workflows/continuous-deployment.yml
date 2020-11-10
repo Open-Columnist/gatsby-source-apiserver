@@ -12,8 +12,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
-      - name: Build & Publish
+      - name: Build
         run: |
           npm ci
-          npm run prepublish
           npm build:npm
+      - name: Publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_NPM_READ }}
+        run: |
+          yarn config set "@open-columnist:registry" "https://npm.pkg.github.com:_authToken=${GITHUB_TOKEN}"
+          yarn publish
