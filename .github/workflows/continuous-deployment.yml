@@ -18,8 +18,8 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - name: Build
         run: |
-          yarn install --frozen-lock --non-interactive
-          yarn prepublish
+          npm ci
+          npm run prepublish
       - name: npm publish on every push
         uses: shawnbot/npm-publish-action@v1.0.1
         env:
