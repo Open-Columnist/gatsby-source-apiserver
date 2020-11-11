@@ -39,7 +39,7 @@ async function doFetch(
     const { data } = response;
 
     haveMorePages = false; // needs to be set to true below
-    if (routeData) {
+    if (data) {
       completeResult.push(data);
       if (calculateNextPage) {
         try {
