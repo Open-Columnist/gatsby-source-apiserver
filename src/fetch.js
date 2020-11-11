@@ -36,11 +36,11 @@ async function doFetch(
     reporter.verbose(`loading from server ${curUrl}`);
     const response = await axios(options);
     reporter.verbose(`got url ${curUrl}`);
-    const { data } = response;
+    const { data: routeData } = response;
 
     haveMorePages = false; // needs to be set to true below
-    if (data) {
-      completeResult.push(data);
+    if (routeData) {
+      completeResult.push(routeData);
       if (calculateNextPage) {
         try {
           const nextPage = calculateNextPage(curUrl, response, context);
